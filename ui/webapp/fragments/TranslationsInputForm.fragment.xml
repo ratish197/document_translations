@@ -1,0 +1,109 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+>
+    <f:SimpleForm 
+            id="userInputForm"
+            editable="true"
+            layout="ResponsiveGridLayout"
+            title="{i18n>contentHeaderTitle}"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            visible="{view>/isTranslationInput}"
+            singleContainerFullSize="false">
+        <f:toolbar>
+            <Toolbar id="userInputFormToolbar">
+                <Title
+                    level="Auto"
+                    text="{i18n>contentHeaderTitle}"
+                    textAlign="Initial"
+                    titleStyle="Auto"
+                    wrapping="false"
+                    wrappingType="Normal"
+                />
+                <ToolbarSpacer />
+                <Button text="{= (${view>/isTranslationInput} &amp;&amp; !${view>/isAsync}) ? ${i18n>buttonTranslate} : ${i18n>buttonJobSchedule}}" type="Emphasized" press=".onTranslate" 
+                icon="{= (${view>/isTranslationInput} &amp;&amp; !${view>/isAsync}) ? 'sap-icon://translate' : 'sap-icon://calendar'}"/>
+                <Button text="{i18n>buttonReset}" icon="sap-icon://reset" press=".onReset"/>
+            </Toolbar>
+        </f:toolbar>
+        <f:content>
+            <Label text="{i18n>labelType}" labelFor="idChooseTypeRadioButton"/>
+            <RadioButtonGroup
+                id="idChooseTypeRadioButton"
+                columns="2"
+                selectedIndex="{= ${view>/isText} ? 0 : 1}">
+                <buttons>
+                    <RadioButton id="idTextType" text="{i18n>textTextType}" selected="{view>/isText}"/>
+                    <RadioButton id="idFileType" text="{i18n>textFileType}" selected="{= !${view>/isText}}"/>
+                </buttons>
+            </RadioButtonGroup>
+            <Label text="{i18n>labelSourceLanguage}" labelFor="idSourceLanguageComboBox" required="true" visible="{view>/isText}"/>
+            <ComboBox
+                id="idSourceLanguageComboBox"
+                showSecondaryValues= "true"
+                selectedKey="{data>/input/sourceLanguage}"
+                selectionChange=".onSourceLanguageChange"
+                visible="{view>/isText}"
+                items="{
+                    path: 'supportedLanguages>/languages',
+                    sorter: { path: 'LanguageText' }
+                }">
+                <c:ListItem key="{supportedLanguages>LanguageCode}" text="{supportedLanguages>LanguageText}" additionalText = "{supportedLanguages>LanguageCode}"/>
+            </ComboBox>
+
+            <Label text="{i18n>labelTargetLanguage}" labelFor="idTargetLanguageComboBox" required="true"/>
+            <ComboBox
+                id="idTargetLanguageComboBox"
+                showSecondaryValues= "true"
+                selectedKey="{data>/input/targetLanguage}"
+                items="{
+                    path: 'supportedLanguages>/languages',
+                    sorter: { path: 'LanguageText' }
+                }">
+                <c:ListItem key="{supportedLanguages>LanguageCode}" text="{supportedLanguages>LanguageText}" additionalText = "{supportedLanguages>LanguageCode}"/>
+            </ComboBox>
+
+            <Label text="{i18n>enterTextLabel}" labelFor="idInputText" required="true" visible="{view>/isText}"/>
+            <TextArea
+                id="idInputText"
+                value="{data>/input/data}"
+                visible="{view>/isText}"
+                placeholder="{i18n>enterTextForTranslation}"
+                maxLength="{view>/maxLength}"
+                width="100%"
+                showExceededText="true"
+                valueState="{= ${data>/input/data}.length > ${view>/maxLength} ? 'Warning' : 'None' }" 
+                valueLiveUpdate="false"
+            />
+            
+            <Label text="{i18n>labelChooseFileUpload}" labelFor="idUploadFile" required="true" visible="{= !${view>/isText}}" />
+            <u:FileUploader
+                id="idUploadFile"
+                name="file"
+                uploadUrl="{view>/uploadPath}?targetLanguage={data>/input/targetLanguage}"
+                visible="{= !${view>/isText}}"
+                tooltip="{i18n>tooltipUploadFileTranslate}"
+                uploadComplete=".onUploadComplete"
+                change=".onFileChange"
+                useMultipart="{= !${view>/isAsync}}"
+                sendXHR="{view>/isAsync}"
+                style="Emphasized"
+                fileType="txt,html,htm,xlf,xliff,docx,docm,dotm,pptx,pptm,ppsx,ppsm,potx,potm,xlsx,mlsx,xltx,xltm"
+                placeholder="{i18n>placeHolderFileUpload}">
+            </u:FileUploader>
+        </f:content>
+    </f:SimpleForm>
+</c:FragmentDefinition>

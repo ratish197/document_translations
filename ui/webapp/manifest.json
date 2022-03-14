@@ -1,0 +1,126 @@
+{
+  "_version": "1.32.0",
+  "sap.app": {
+    "id": "com.ui.document.ui",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.98.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {},
+        "sap.ui.layout": {},
+        "sap.ui.unified": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "supportedLanguages": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": "model/SupportedLanguages.json"
+			},
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ui.document.ui.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.ui.document.ui.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "main",
+          "target": [
+            "main"
+          ]
+        },
+        {
+          "pattern": "Synchronous",
+          "name": "synchronous",
+          "target": [
+            "synchronous"
+          ]
+        },
+        {
+          "pattern": "Asynchronous",
+          "name": "asynchronous",
+          "target": [
+            "asynchronous"
+          ]
+        }
+      ],
+      "targets": {
+        "main": {
+          "viewType": "XML",
+          "viewLevel": 1,
+          "viewId": "main",
+          "viewName": "Main"
+        },
+        "asynchronous": {
+          "viewType": "XML",
+          "viewLevel": 2,
+          "viewId": "asynchronous",
+          "viewName": "AsyncTranslations"
+        },
+        "synchronous": {
+          "viewType": "XML",
+          "viewLevel": 2,
+          "viewId": "synchronous",
+          "viewName": "SyncTranslations"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.ui.document.ui.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

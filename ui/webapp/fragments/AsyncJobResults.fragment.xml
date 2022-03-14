@@ -1,0 +1,39 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+>
+	<f:SimpleForm 
+            id="apiAsyncJobResultsForm"
+            editable="false"
+            layout="ResponsiveGridLayout"
+            title="{i18n>formTitleJobResults}"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            busy="{view>/responseBusy}"
+            visible="{= !${view>/isTranslationInput}}"
+            singleContainerFullSize="false">
+        <f:toolbar>
+            <Toolbar id="apiAsyncJobResultToolbar">
+                <Title id="idTitleAsyncJob" text="{i18n>formTitleJobResults}"/>
+                <ToolbarSpacer />
+                <Button icon="sap-icon://download" text="{i18n>buttonDownload}" press=".onDownload" visible="{view>/isDownloadVisible}"/>
+            </Toolbar>
+        </f:toolbar>
+        
+        <f:content>
+            <Label text="{i18n>labelJobsResult}" labelFor="idJobsResultText"/>
+            <Text id="idJobsResultText" text="{data>/scheduleresult}"/>
+        </f:content>
+    </f:SimpleForm>
+</c:FragmentDefinition>

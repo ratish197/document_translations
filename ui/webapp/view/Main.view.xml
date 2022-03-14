@@ -1,0 +1,78 @@
+<mvc:View
+	controllerName="com.ui.document.ui.controller.Main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:f="sap.ui.layout.form"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+
+    <semantic:SemanticPage
+            id="mainPage"
+            headerPinnable="false"
+            toggleHeaderOnTitleClick="false"
+            busy="false"
+            busyIndicatorDelay="0">
+
+            <semantic:titleHeading>
+                <Title
+                    text="{i18n>appTitle}"
+                    level="H2"/>
+            </semantic:titleHeading>
+
+            <semantic:headerContent>
+                <Text text="{i18n>appDescription}"/>
+            </semantic:headerContent>
+
+            <semantic:content>
+            <f:SimpleForm 
+							id="chooseTranslationMode"
+							editable="true"
+							layout="ResponsiveGridLayout"
+							title="{i18n>formTitleMode}"
+							labelSpanXL="3"
+							labelSpanL="3"
+							labelSpanM="3"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="4"
+							emptySpanL="4"
+							emptySpanM="4"
+							emptySpanS="0"
+							columnsXL="1"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false">
+					<f:toolbar>
+						<Toolbar id="chooseTransModeFormToolbar">
+							<Title
+								level="Auto"
+								text="{i18n>formTitleMode}"
+								textAlign="Initial"
+								titleStyle="Auto"
+								wrapping="false"
+								wrappingType="Normal"
+							/>
+							<ToolbarSpacer />
+							<Button text="{i18n>buttonTextGo}" icon="sap-icon://feeder-arrow" iconFirst="false" type="Emphasized" press=".onConfirmAPI"/>
+						</Toolbar>
+					</f:toolbar>
+					<f:content>
+						<Label text="{i18n>labelChooseMode}" labelFor="idChooseModeRadioButton"/>
+						<RadioButtonGroup
+							id="idChooseModeRadioButton"
+							columns="2"
+							selectedIndex="{= ${main>/shortText} ? 0 : 1}">
+							<buttons>
+								<RadioButton id="idSyncTextType" text="{i18n>labelSyncAPI}" selected="{main>/shortText}"/>
+								<RadioButton id="idAsyncTextType" text="{i18n>labelAsyncAPI}" selected="{= !${main>/shortText}}"/>
+							</buttons>
+						</RadioButtonGroup>
+					</f:content>
+				</f:SimpleForm>
+            </semantic:content>
+    </semantic:SemanticPage>
+
+</mvc:View>

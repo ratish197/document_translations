@@ -1,0 +1,49 @@
+<mvc:View
+	controllerName="com.ui.document.ui.controller.AsyncTranslations"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:semantic="sap.f.semantic"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+
+    <semantic:SemanticPage
+            id="asyncTranslationPage"
+            headerPinnable="false"
+            toggleHeaderOnTitleClick="false"
+            busy="false"
+            busyIndicatorDelay="0">
+
+            <semantic:titleHeading>
+                <Title
+                    text="{i18n>pageTitleAsync}"
+                    level="H2"/>
+            </semantic:titleHeading>
+
+            <semantic:headerContent>
+                <Text text="{i18n>headerTextAsync}"/>
+            </semantic:headerContent>
+
+            <semantic:content>
+                <VBox>
+                    <RadioButtonGroup
+                        id="idChooseScheduleRadioButton"
+                        columns="2"
+                        selectedIndex="{= ${view>/isTranslationInput} ? 0 : 1}">
+                        <buttons>
+                            <RadioButton id="idJobScheduleType" text="{i18n>textScheduleJob}" selected="{view>/isTranslationInput}"/>
+                            <RadioButton id="idJobResultType" text="{i18n>textJobResults}" selected="{= !${view>/isTranslationInput}}"/>
+                        </buttons>
+                    </RadioButtonGroup>
+                    <!-- Input section -->
+                    <c:Fragment fragmentName="com.ui.document.ui.fragments.TranslationsInputForm" type="XML"/>
+                    <c:Fragment fragmentName="com.ui.document.ui.fragments.AsyncJobInput" type="XML"/>
+                    <!-- Output section -->
+                    <c:Fragment fragmentName="com.ui.document.ui.fragments.TranslationsOutputAsyncForm" type="XML"/>
+                    <c:Fragment fragmentName="com.ui.document.ui.fragments.AsyncJobResults" type="XML"/>
+                </VBox>
+            </semantic:content>
+    </semantic:SemanticPage>
+</mvc:View>

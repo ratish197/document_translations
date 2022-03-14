@@ -1,0 +1,37 @@
+<mvc:View
+	controllerName="com.ui.document.ui.controller.SyncTranslations"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+    xmlns:semantic="sap.f.semantic"
+>
+    <semantic:SemanticPage
+		id="translationPage"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="false"
+		busyIndicatorDelay="0">
+
+		<semantic:titleHeading>
+			<Title
+				text="{i18n>pageTitleSync}"
+				level="H2"/>
+		</semantic:titleHeading>
+
+		<semantic:headerContent>
+			<Text text="{i18n>headerTextSync}"/>
+		</semantic:headerContent>
+
+		<semantic:content>
+			<VBox>
+				<!-- Input section -->
+				<c:Fragment fragmentName="com.ui.document.ui.fragments.TranslationsInputForm" type="XML"/>
+				<!-- Output section -->
+				<c:Fragment fragmentName="com.ui.document.ui.fragments.TranslationsOutputForm" type="XML"/>
+			</VBox>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>

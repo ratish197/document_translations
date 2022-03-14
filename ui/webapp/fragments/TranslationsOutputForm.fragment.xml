@@ -1,0 +1,38 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <f:SimpleForm 
+            id="apiResponseForm"
+            editable="false"
+            layout="ResponsiveGridLayout"
+            title="{i18n>contentHeaderResultsTitle}"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            visible="{view>/isText}"
+            busy="{view>/responseBusy}"
+            singleContainerFullSize="false">
+        <f:content>
+            <Label text="{i18n>labelSourceLanguageText}" labelFor="idSourceLanguageText"/>
+            <Text id="idSourceLanguageText" text="{data>/output/sourceLanguage}"/>
+
+            <Label text="{i18n>labelTargetLanguageText}" labelFor="idTargetLanguageText"/>
+            <Text id="idTargetLanguageText" text="{data>/output/targetLanguage}"/>
+
+            <Label text="{i18n>labelTranslatedText}" labelFor="idTranslatedText"/>
+            <Text id="idTranslatedText" text="{data>/output/data}"/>
+            
+        </f:content>
+    </f:SimpleForm>
+</c:FragmentDefinition>

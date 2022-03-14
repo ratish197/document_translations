@@ -1,0 +1,38 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+<f:SimpleForm 
+            id="apiAsyncResponseForm"
+            editable="false"
+            layout="ResponsiveGridLayout"
+            title="{i18n>formTitleJobDetails}"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            busy="{view>/responseBusy}"
+            visible="{view>/isTranslationInput}"
+            singleContainerFullSize="false">
+        <f:content>
+            <Label text="{i18n>labelJobsID}" labelFor="idJobsIdText"/>
+            <Text id="idJobsIdText" text="{data>/job/id}"/>
+
+            <Label text="{i18n>labelTranslationProgress}" labelFor="idTransProgressText"/>
+            <Text id="idTransProgressText" text="{data>/job/progress}"/>
+
+            <Label text="{i18n>labelTranslationStatus}" labelFor="idTransStatusText"/>
+            <Text id="idTransStatusText" text="{data>/job/status}"/>
+            
+        </f:content>
+    </f:SimpleForm>
+</c:FragmentDefinition>

@@ -1,0 +1,64 @@
+_schema-version: "3.2"
+ID: mta_translations
+version: 0.0.1
+modules:
+- name: mta-translations-approuter
+  type: approuter.nodejs
+  path: mta-translations-approuter
+  requires:
+  - name: mta_translations_html_repo_runtime
+  - name: uaa_mta_translations
+  - name: mta_translations-dest-srv
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: mta_translations_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: mta_translations_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comuidocumentui.zip
+      name: comuidocumentui
+      target-path: resources/
+- name: comuidocumentui
+  type: html5
+  path: ui
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: mta_translations_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: uaa_mta_translations
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: mta_translations-xsuaa-service
+    service-plan: application
+- name: mta_translations_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: mta_translations-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-name: mta_translations-dest-srv
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo

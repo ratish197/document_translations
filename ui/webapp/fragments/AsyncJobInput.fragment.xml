@@ -1,0 +1,45 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <f:SimpleForm 
+            id="apiAsyncJobInputForm"
+            editable="true"
+            layout="ResponsiveGridLayout"
+            title="{i18n>formTitleJobInput}"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            visible="{= !${view>/isTranslationInput}}"
+            singleContainerFullSize="false">
+        <f:toolbar>
+            <Toolbar id="jobInputFormToolbar">
+                <Title
+                    level="Auto"
+                    text="{i18n>formTitleJobInput}"
+                    textAlign="Initial"
+                    titleStyle="Auto"
+                    wrapping="false"
+                    wrappingType="Normal"
+                />
+                <ToolbarSpacer />
+                <Button text="{i18n>buttonJobResult}" icon="sap-icon://task" type="Emphasized" press=".onCheckJobResult"/>
+                <Button text="{i18n>buttonReset}" icon="sap-icon://reset" type="Default" press=".onJobReset"/>
+            </Toolbar>
+        </f:toolbar>
+        <f:content>
+            <Label text="{i18n>labelJobsID}" labelFor="idJobIdInput" required="true"/>
+            <Input id="idJobIdInput" value="{data>/scheduleinput}"/>
+        </f:content>
+    </f:SimpleForm>
+</c:FragmentDefinition>
