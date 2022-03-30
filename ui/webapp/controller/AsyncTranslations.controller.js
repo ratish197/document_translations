@@ -64,7 +64,7 @@ sap.ui.define([
 				MessageBox.error("Missing Job ID");
 				return;
 			}
-			sap.m.URLHelper.redirect("/comuidocumentui/destination/api/v1/translation/jobs/".concat(sJobID).concat("/result?$value"));
+			sap.m.URLHelper.redirect("/comuidocumentui/destination/api/v1/translation/jobs/".concat(sJobID).concat("/result"));
 		},
 		
 		_translateText: function() {
